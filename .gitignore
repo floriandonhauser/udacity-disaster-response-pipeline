@@ -132,4 +132,4 @@ dmypy.json
 .idea/
 
 # Database
-data/disaster_response.db
+data/DisasterResponse.db
