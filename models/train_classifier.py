@@ -15,6 +15,15 @@ from sqlalchemy import create_engine
 
 
 def load_data(database_filepath):
+    """
+        Loads the data from the SQL database
+        Arguments:
+            database_filepath: filepath for SQL database
+        Returns:
+            X: message as input for the model
+            Y: categories as output labels for the model
+            category_names: names of the categories
+    """
     # load data from database
     engine = create_engine("sqlite:///" + database_filepath)
     df = pd.read_sql_table('Messages', engine)
@@ -24,6 +33,13 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    """
+        Tokenizes a single string
+        Arguments:
+            text: string to tokenize
+        Returns:
+            List of words which are not stopwords in the english language
+    """
     text = text.lower()
     text = re.sub(r"[^a-z0-9]+", " ", text)
     tokens = nltk.word_tokenize(text)
@@ -32,6 +48,11 @@ def tokenize(text):
 
 
 def build_model():
+    """
+        Creates the model for training
+        Returns:
+            Grid search which can be used to train the model
+    """
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
@@ -46,6 +67,14 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """
+        Calculates metrics for model and prints them out on the console
+        Arguments:
+            model: model to evaluate
+            X_test: test input for the model
+            Y_test: true labels
+            category_names: names of teh categories
+    """
     Y_pred = model.predict(X_test)
     print(classification_report(Y_test, Y_pred, target_names=category_names))
     print("Total accuracy:")
@@ -53,6 +82,12 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
+    """
+        Saves the model to disk using pickle
+        Arguments:
+            model: model to save
+            model_filepath: filepath to save the model
+    """
     with open(model_filepath, 'wb') as file:
         pickle.dump(model, file)
 

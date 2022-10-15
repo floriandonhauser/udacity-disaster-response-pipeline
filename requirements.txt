@@ -1,0 +1,8 @@
+flask
+jupyter
+jupyter-contrib-nbextensions
+nltk
+pandas
+plotly
+sklearn
+sqlalchemy
