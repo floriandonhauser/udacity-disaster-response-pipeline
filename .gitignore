@@ -133,3 +133,4 @@ dmypy.json
 
 # Database
 data/DisasterResponse.db
+models/classifier.pkl
