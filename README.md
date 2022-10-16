@@ -6,7 +6,8 @@ Install all required packages from requirements.txt. `pip install -r requirement
 
 ### Project Overview
 This project is a web app which can be used to classify a message from a disaster event into several categories.  
-It uses a machine learning model to detect which of the 36 classes the message could belong to.
+It uses a machine learning model to detect which of the 36 classes the message could belong to.  
+Using such an approach, messages could be forwarded to the right agency when a new disaster message is received so that the correct measures can be taken.
 
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.

@@ -5,6 +5,7 @@ import sys
 import nltk
 import pandas as pd
 from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.metrics import classification_report
@@ -44,6 +45,8 @@ def tokenize(text):
     text = re.sub(r"[^a-z0-9]+", " ", text)
     tokens = nltk.word_tokenize(text)
     tokens = [w for w in tokens if w not in stopwords.words('english')]
+    lemmatizer = WordNetLemmatizer()
+    tokens = [lemmatizer.lemmatize(w) for w in tokens]
     return tokens
 
 
